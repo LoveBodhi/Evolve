@@ -1,3 +1,6 @@
+# 备注 Notes
+strings-yingchun-sandbox 为简体中文，strings-yingchun-sandbox2 为繁体中文。
+
 # Translation tools
 
 There are two python scripts to help to translate the strings.json file: updateStrings<span></span>.py and checkStrings<span></span>.py.
