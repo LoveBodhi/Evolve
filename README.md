@@ -1,3 +1,6 @@
+# 备注 Notes
+本分支将作为迎春心情的 进化 官方汉化沙盒仓库。<br/>This branch will be Yingchun Soul's official CN translation sandbox.
+
 # Evolve
 
 ## Play
