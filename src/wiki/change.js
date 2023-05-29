@@ -4,7 +4,7 @@ import { clearElement } from './../functions.js';
 const changeList = [
     {
         version: `1.3.7`,
-        date: `5/26/2023`,
+        date: `5/29/2023`,
         changes: [
             `Added Magic universe exclusive challenge: Witch Hunter.`,
             `Reduced Encrypted Data cost of Data Analysis, Advanced Medkits, Automated Warehousing, Elerium Extraction, and Drone Warfare techs.`,
@@ -14,7 +14,9 @@ const changeList = [
             `Reduced Crystal cost of Alchemy.`,
             `Fixed Humpback trait rank scaling.`,
             `Infiltrator can now steal Alien Biotech on Truepath.`,
-            `Fixed brownout issue with using Replicator Gov task when construting a new powered building.`,
+            `Fixed brownout issue with using Replicator Gov task when constructing a new powered building.`,
+            `Fixed rejuvenated trashed planet bonus.`,
+            `Fixed orbit period on reterraformed planets.`,
         ]
     },
     {

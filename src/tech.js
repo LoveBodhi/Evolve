@@ -465,7 +465,7 @@ const techs = {
         category: 'eldritch',
         era: 'civilized',
         reqs: { psychic: 1, military: 1 },
-        condition(){ return global.stats.murders >= 10; },
+        condition(){ return global.stats.psykill >= 10; },
         trait: ['psychic'],
         grant: ['psychic',2],
         cost: {
@@ -483,19 +483,66 @@ const techs = {
             renderPsychicPowers();
         }
     },
+    psychic_finance: {
+        id: 'tech-psychic_finance',
+        title: loc('tech_psychic_finance'),
+        desc: loc('tech_psychic_finance'),
+        category: 'eldritch',
+        era: 'civilized',
+        reqs: { psychic: 2, high_tech: 4 },
+        trait: ['psychic'],
+        grant: ['psychic',3],
+        cost: {
+            Knowledge(){ return 65000; }
+        },
+        effect: loc('tech_psychic_finance_effect'),
+        action(){
+            if (payCosts($(this)[0])){
+                global.race.psychicPowers['cash'] = 0;
+                return true;
+            }
+            return false;
+        },
+        post(){
+            renderPsychicPowers();
+        }
+    },
     mind_break: {
         id: 'tech-mind_break',
         title: loc('tech_mind_break'),
         desc: loc('tech_mind_break'),
         category: 'eldritch',
         era: 'civilized',
-        reqs: { psychic: 2, high_tech: 1 },
+        reqs: { psychic: 2, high_tech: 1, unfathomable: 2 },
         trait: ['psychic'],
-        grant: ['psychic',3],
+        grant: ['psychicthrall',1],
         cost: {
             Knowledge(){ return 7000; }
         },
         effect: loc('tech_mind_break_effect'),
+        action(){
+            if (payCosts($(this)[0])){
+                return true;
+            }
+            return false;
+        },
+        post(){
+            renderPsychicPowers();
+        }
+    },
+    psychic_stun: {
+        id: 'tech-psychic_stun',
+        title: loc('tech_psychic_stun'),
+        desc: loc('tech_psychic_stun'),
+        category: 'eldritch',
+        era: 'civilized',
+        reqs: { psychicthrall: 1, high_tech: 3, unfathomable: 2 },
+        trait: ['psychic'],
+        grant: ['psychicthrall',2],
+        cost: {
+            Knowledge(){ return 32000; }
+        },
+        effect: loc('tech_psychic_stun_effect'),
         action(){
             if (payCosts($(this)[0])){
                 return true;
@@ -630,6 +677,11 @@ const techs = {
                 return true;
             }
             return false;
+        },
+        post(){
+            if (global.tech['s_lodge']){
+                global.tech['hunting'] = 2;
+            }
         }
     },
     lodge: {
@@ -640,6 +692,7 @@ const techs = {
         category: 'agriculture',
         era: 'civilized',
         reqs: { hunting: 1, housing: 1, currency: 1 },
+        condition(){ return global.tech['s_lodge'] ? false : true; },
         grant: ['hunting',2],
         cost: {
             Knowledge(){ return 180; }

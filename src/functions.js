@@ -707,6 +707,9 @@ export function costMultiplier(structure,offset,base,mutiplier,cat){
     if (global.tech['housing_reduction'] && (structure === 'basic_housing' || structure === 'cottage')){
         mutiplier -= global.tech['housing_reduction'] * 0.02;
     }
+    if (global.tech['housing_reduction'] && structure === 'captive_housing'){
+        mutiplier -= global.tech['housing_reduction'] * 0.01;
+    }
     if (structure === 'basic_housing'){
         if (global.race['solitary']){
             mutiplier -= traits.solitary.vars()[0];
@@ -2334,6 +2337,8 @@ export function updateResetStats(){
     global.stats.cattle = 0;
     global.stats.tmurders += global.stats.murders;
     global.stats.murders = 0;
+    global.stats.tpsykill += global.stats.psykill;
+    global.stats.psykill = 0;
 }
 
 export function deepClone(obj){
@@ -2810,6 +2815,9 @@ const traitExtra = {
     ],
     flier: [
         loc(`wiki_trait_effect_flier_ex1`)
+    ],
+    unfathomable: [
+        loc(`wiki_trait_effect_unfathomable_ex1`)
     ]
 };
 

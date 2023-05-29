@@ -4302,7 +4302,11 @@ export function buildTemplate(key, region){
                 },
                 effect(){
                     let desc = ``;
-                    desc += `<div>${loc(`city_captive_housing_cattle`,[global.city.captive_housing.cattle,global.city.captive_housing.cattleCap])}</div>`;
+                    if (!global.race['artifical'] && !global.race['detritivore'] && !global.race['carnivore'] && !global.race['soul_eater']){
+                        let cattle = global.city.hasOwnProperty('captive_housing') ? global.city.captive_housing.cattle : 0;
+                        let cattleCap = global.city.hasOwnProperty('captive_housing') ? global.city.captive_housing.cattleCap : 0;
+                        desc += `<div>${loc(`city_captive_housing_cattle`,[cattle,cattleCap])}</div>`;
+                    }
 
                     let usedCap = 0;
                     if (global.city.hasOwnProperty('surfaceDwellers')){
@@ -4316,7 +4320,8 @@ export function buildTemplate(key, region){
                         }
                     }
 
-                    desc += `<div>${loc(`city_captive_housing_capacity`,[usedCap,global.city.captive_housing.raceCap])}</div>`;
+                    let raceCap = global.city.hasOwnProperty('captive_housing') ? global.city.captive_housing.raceCap : 0;
+                    desc += `<div>${loc(`city_captive_housing_capacity`,[usedCap,raceCap])}</div>`;
                     if (global.tech['unfathomable'] && global.tech.unfathomable >= 2){
                         desc += `<div>${loc(`plus_max_resource`,[1,loc('job_torturer')])}</div>`;
                     }
@@ -4326,7 +4331,7 @@ export function buildTemplate(key, region){
                     if (payCosts($(this)[0])){
                         global.city.captive_housing.count++;
                         let houses = global.city.captive_housing.count;
-                        global.city.captive_housing.raceCap = houses * 2;
+                        global.city.captive_housing.raceCap = houses * (global.tech['unfathomable'] && global.tech.unfathomable >= 3 ? 3 : 2);
                         global.city.captive_housing.cattleCap = houses * 5;
                         return true;
                     }
@@ -4410,8 +4415,29 @@ function genus_condition(r,t){
     return ((global.tech[t] && global.tech[t] === r) || (global.evolution['gselect'])) && f < 100;
 }
 
-export const raceList = ['human','orc','elven','troll','ogre','cyclops','kobold','goblin','gnome','cath','wolven','vulpine','centaur','rhinotaur','capybara','tortoisan','gecko','slitheryn','arraak','pterodacti','dracnid','sporgar','shroomi','moldling','mantis','scorpid','antid','entish','cacti','pinguicula','sharkin','octigoran','dryad','satyr','phoenix','salamander','yeti','wendigo','tuskin','kamel','imp','balorg','seraph','unicorn','synth','nano','ghast','shoggoth','custom'];
-//export const raceList = ['human','orc','elven','troll','ogre','cyclops','kobold','goblin','gnome','cath','wolven','vulpine','centaur','rhinotaur','capybara','bearkin','porkenari','hedgeoken','tortoisan','gecko','slitheryn','arraak','pterodacti','dracnid','sporgar','shroomi','moldling','mantis','scorpid','antid','entish','cacti','pinguicula','sharkin','octigoran','dryad','satyr','phoenix','salamander','yeti','wendigo','tuskin','kamel','imp','balorg','seraph','unicorn','synth','nano'];
+const raceList = [
+    'human','orc','elven',
+    'troll','ogre','cyclops',
+    'kobold','goblin','gnome',
+    'cath','wolven','vulpine',
+    'centaur','rhinotaur','capybara',
+    //'bearkin','porkenari','hedgeoken',
+    'tortoisan','gecko','slitheryn',
+    'arraak','pterodacti','dracnid',
+    'sporgar','shroomi','moldling',
+    'mantis','scorpid','antid',
+    'entish','cacti','pinguicula',
+    'sharkin','octigoran',
+    'dryad','satyr',
+    'phoenix','salamander',
+    'yeti','wendigo',
+    'tuskin','kamel',
+    'imp','balorg',
+    'seraph','unicorn',
+    'synth','nano',
+    'ghast','shoggoth',
+    'custom'
+];
 raceList.forEach(race => actions.evolution[race] = {
     id: `evolution-${race}`,
     title(){ return races[race].name; },
@@ -4443,7 +4469,9 @@ raceList.forEach(race => actions.evolution[race] = {
 });
 
 if (Object.keys(global.stats.synth).length > 1){
-    raceList.forEach(race => actions.evolution[`s-${race}`] = {
+    let synthList = deepClone(raceList);
+    synthList.push('junker'); synthList.push('sludge');
+    synthList.forEach(race => actions.evolution[`s-${race}`] = {
         id: `evolution-s-${race}`,
         title(){ return races[race].name; },
         desc(){ return `${loc("evo_imitate")} ${races[race].name}`; },
