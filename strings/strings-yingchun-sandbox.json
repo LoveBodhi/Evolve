@@ -3687,7 +3687,7 @@
   "arpa_syphon_effect2": "宇宙结构已经造成无法挽回的破坏。",
   "arpa_syphon_effect3": "宇宙接近坍缩状态。",
   "arpa_syphon_effect4": "宇宙正在处于坍缩状态；您只是加速坍缩进度而已。",
-  "arpa_syphon_effect_reward": "拥有大约%4个法力虹吸之后，将会从真空中产生泡沫，进而毁灭宇宙；与此同时，将会产生%0点%3、%1个噬菌体和%2点暗能量。"
+  "arpa_syphon_effect_reward": "拥有大约%4个法力虹吸之后，将会从真空中产生泡沫，进而毁灭宇宙；与此同时，将会产生%0点%3、%1个噬菌体和%2点暗能量。",
   "arpa_syphon_damage": "Vacuum Collapse",
   "arpa_perks_creep": "Cost creep reduced by %0",
   "arpa_perks_store1": "Plasmids increase storage by %0%",
