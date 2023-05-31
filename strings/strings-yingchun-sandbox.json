@@ -7518,6 +7518,7 @@
   "wiki_trait_effect_shapeshifter": "Ability to assume genus properties from other genus. Positive traits are assumed at rank %0, while negative traits are assumed at rank %1.",
   "wiki_trait_effect_psychic": "Energy Regen +%2. Mind Break +%0%. Thrall effectiveness +%1%.",
   "wiki_trait_effect_unfathomable": "Your culture is nightmarish and incomprehensible to outsiders.",
+  "wiki_trait_effect_unfathomable_ex1": "您可以指派市民成为突击者。突击者在世界表面窃取资源、市民和俘虏。捕获的表面居民可以转化为俘虏，其加成因种族而异。",
   "wiki_trait_effect_darkness": "Sunny days have a chance to be replaced with cloudy.",
   "wiki_trait_effect_tormented": "Morale above 100% is greatly reduced by %0%.",
   "wiki_trait_effect_swift": "Combat rating is improved by %0% and you catch prospect thralls %1% easier.",
